@@ -3,8 +3,7 @@ package com.bck.simpleword
 import android.content.Context
 import android.os.Bundle
 import android.os.Environment
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -24,8 +23,6 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class SelectFileActivity : AppCompatActivity() {
-
-
     @SuppressLint("NewApi")
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +32,6 @@ class SelectFileActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
         val items = FileItems()
         items.setRecyclerView(recyclerView_SelectFile)
         items.setLinearLayoutManager(this)
@@ -44,21 +40,24 @@ class SelectFileActivity : AppCompatActivity() {
 
         items.openDirectory(pathDownload)
 
-
-
     }
 }
 class FileItems: ArrayList<ItemFile>(){
     private var recyclerView: RecyclerView? = null
     private val storageRootDirectory = Environment.getExternalStorageDirectory().toString() // "/storage/emulated/0"
 
+    fun setLinearLayoutManager(context: Context) {
+        recyclerView!!.layoutManager = LinearLayoutManager(context)
+    }
+    fun setRecyclerView(recyclerView: RecyclerView) {
+        this.recyclerView = recyclerView
+    }
     private fun add(name : String) {
         this.add(ItemFile(name))
     }
     private fun add(file: File) {
         this.add(ItemFile(file))
     }
-
     private fun redraw() {
         val fileItems = this
         val adapter = SelectFileAdapter(fileItems)
@@ -75,18 +74,12 @@ class FileItems: ArrayList<ItemFile>(){
         }
         recyclerView!!.adapter = adapter
     }
-    fun setLinearLayoutManager(context: Context) {
-        recyclerView!!.layoutManager = LinearLayoutManager(context)
-    }
-    fun setRecyclerView(recyclerView: RecyclerView) {
-        this.recyclerView = recyclerView
-    }
     fun openDirectory(mPath: String) {
         val f = File(mPath)
         //val fs = f.listFiles().toList()
 
         val fs = f.listFiles()
-        this.clear()
+        super.clear()
 
         if (mPath != storageRootDirectory) {
             this.add("../")
@@ -106,7 +99,6 @@ class FileItems: ArrayList<ItemFile>(){
         }
         this.redraw()
     }
-
 }
 class ItemFile(val file : File) {
     var path: String = ""
@@ -122,8 +114,7 @@ class ItemFile(val file : File) {
 
 
 }
-class SelectFileAdapter (itemList : FileItems) : RecyclerView.Adapter<SelectFileAdapter.ViewHolder>() {
-    private var items : FileItems? = itemList
+class SelectFileAdapter (private val items : FileItems) : RecyclerView.Adapter<SelectFileAdapter.ViewHolder>() {
     interface ItemClick{
         fun onClick(view: View, position: Int)
     }
@@ -135,7 +126,7 @@ class SelectFileAdapter (itemList : FileItems) : RecyclerView.Adapter<SelectFile
     }
     @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = items!![position]
+        val item = items[position]
         holder.textViewName.text = item.name
         holder.textViewModifiedDate.text = SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss").format(Date(item.file.lastModified()))
@@ -144,7 +135,7 @@ class SelectFileAdapter (itemList : FileItems) : RecyclerView.Adapter<SelectFile
             holder.imageView.setImageResource(R.drawable.ic_folder_24dp)
         }else{
             if(item.file.extension == "xls"){
-                holder.imageView.setImageResource((R.drawable.ic_note_add_black_24dp))
+                holder.imageView.setImageResource(R.drawable.ic_note_add_black_24dp)
             }else{
                 holder.imageView.setImageResource(R.drawable.ic_insert_drive_file_24dp)
             }
@@ -157,11 +148,11 @@ class SelectFileAdapter (itemList : FileItems) : RecyclerView.Adapter<SelectFile
         }
     }
     override fun getItemCount(): Int {
-        return items!!.size
+        return items.size
     }
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var textViewName = view.findViewById(R.id.textView_FileName) as TextView
-        var textViewModifiedDate = view.findViewById(R.id.textView_FileModifiedDate) as TextView
+        var textViewModifiedDate = view.findViewById(R.id.textView_WordText) as TextView
         var imageView = view.findViewById(R.id.imageView_fileIcon) as ImageView
     }
 }

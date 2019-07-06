@@ -16,5 +16,7 @@
     <string name="import_xls">Import from XLS</string>
     <string name="title_activity_select_file">Select XLS file</string>
     <string name="title_activity_add_word">Add a word</string>
+    <string name="word">Word</string>
+    <string name="pronunciation">Pronunciation</string>
 
 </resources>

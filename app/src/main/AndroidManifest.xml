@@ -12,7 +12,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".AddWordActivity"
+                android:name=".EditWordActivity"
                 android:label="@string/title_activity_add_word"
                 android:parentActivityName=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">

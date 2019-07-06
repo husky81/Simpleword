@@ -33,7 +33,7 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"/>
 
     <TextView
-            android:id="@+id/textView_FileModifiedDate"
+            android:id="@+id/textView_WordText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
