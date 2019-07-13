@@ -21,7 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_add_word"/>
+    <include layout="@layout/content_edit_word"/>
 
     <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_dialog_email"/>
+            app:backgroundTint="@color/design_default_color_primary_dark"
+            app:rippleColor="#3F51B5" android:tint="#F8F5F5"/>
 
 </android.support.design.widget.CoordinatorLayout>

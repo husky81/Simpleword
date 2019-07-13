@@ -2,18 +2,17 @@ package com.bck.simpleword
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 
-import kotlinx.android.synthetic.main.activity_add_word.*
-import kotlinx.android.synthetic.main.content_add_word.*
+import kotlinx.android.synthetic.main.activity_edit_word.*
+import kotlinx.android.synthetic.main.content_edit_word.*
 
 class EditWordActivity : AppCompatActivity() {
     var word = Word("")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_word)
+        setContentView(R.layout.activity_edit_word)
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener {
@@ -44,7 +43,7 @@ class EditWordActivity : AppCompatActivity() {
 
         intent = Intent()
         intent.putExtra("Word", word)
-        setResult(RESULT_CODE_EDITED_WORD, intent)
+        setResult(RESULT_CODE_WORD, intent)
 
         finish()
     }
