@@ -136,7 +136,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 when(resultCode){
                     RESULT_CODE_WORD -> {
                         val word = data!!.getParcelableExtra<Word>("Word")
-                        words[positionEditingWord] = word
+                        words.update(positionEditingWord, word)
+                        // words.update(word)
                         redrawWords(words)
                     }
                 }
@@ -181,9 +182,9 @@ class Words(activity: Activity, recyclerView: RecyclerView): ArrayList<Word>(){
     fun load(element: Word): Boolean {
         return super.add(element)
     }
-    fun update(index: Int, word: Word){
+    fun update(rowRecyclerView: Int, word: Word){
         dbHandler.update(word)
-        this[index] = word
+        this[rowRecyclerView] = word
     }
     fun deleteAll() {
         dbHandler.deleteAll()
@@ -301,6 +302,13 @@ class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.Curso
     fun insert(word: Word): Long {
         return this.insert(word2contentValues(word)!!)
     }
+    fun update(word: Word): Int {
+        val db = this.writableDatabase
+        val index = db.update(TABLE_PRODUCTS,word2contentValues(word),"id=" + word.id,null)
+        db.close()
+        return index
+
+    }
     fun queryAll(words: Words): Words{
         val db = this.readableDatabase
         val cursor = db.rawQuery("select * from $TABLE_PRODUCTS", null)
@@ -375,8 +383,5 @@ class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.Curso
         return values
     }
 
-    fun update(word: Word) {
-
-    }
 }
 
