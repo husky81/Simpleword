@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
+            android:tint="#F8F5F5"
             app:backgroundTint="@color/design_default_color_primary_dark"
-            app:rippleColor="#3F51B5" android:tint="#F8F5F5"/>
+            app:rippleColor="#BDBFCE" />
 
 </android.support.design.widget.CoordinatorLayout>
