@@ -11,20 +11,22 @@
             android:id="@+id/textView_FileName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
-            android:text="TextView"
+            android:text="@string/textview"
             android:textSize="20sp"
             android:textStyle="normal"
             android:typeface="normal"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp" app:layout_constraintStart_toEndOf="@+id/imageView_fileIcon"
-            android:layout_marginStart="8dp" android:layout_marginLeft="8dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView_fileIcon"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
             android:id="@+id/textView_WordText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="@string/textview"
             android:textColor="#C4546966"
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@+id/textView_FileName"
