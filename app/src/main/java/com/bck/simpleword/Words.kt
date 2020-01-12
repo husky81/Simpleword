@@ -35,6 +35,9 @@ class Words(activity: Activity, recyclerView: RecyclerView): ArrayList<Word>(){
         dbHandler.deleteAll()
         super.clear()
     }
+    fun delete(word: Word){
+        dbHandler.delete(word.id)
+    }
 }
 class Word(var name: String?) : Parcelable {
     //파셀러블로 만들면 클래스를 엑티비티간에 전송할 수 있다.
@@ -47,6 +50,7 @@ class Word(var name: String?) : Parcelable {
     var memo: String? = ""
     var correct: Int = 0
     var wrong: Int = 0
+    var deleteCall: Int = 0
 
     constructor(parcel: Parcel) : this(parcel.readString()) {
         id = parcel.readInt()
@@ -55,6 +59,7 @@ class Word(var name: String?) : Parcelable {
         memo = parcel.readString()
         correct = parcel.readInt()
         wrong = parcel.readInt()
+        deleteCall = parcel.readInt()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -65,6 +70,7 @@ class Word(var name: String?) : Parcelable {
         parcel.writeString(memo)
         parcel.writeInt(correct)
         parcel.writeInt(wrong)
+        parcel.writeInt(deleteCall)
     }
 
     override fun describeContents(): Int {
@@ -82,6 +88,7 @@ class Word(var name: String?) : Parcelable {
     }
 
 }
+
 class WordAdapter (private val words : Words) : RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
     interface ItemClick{ fun onClick(view: View, position: Int) }
     var itemClick: ItemClick? = null
@@ -104,7 +111,6 @@ class WordAdapter (private val words : Words) : RecyclerView.Adapter<WordAdapter
 
     }
 }
-
 class MyDBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int): SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
     companion object {
         private const val DATABASE_VERSION = 2

@@ -9,7 +9,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_edit_word.*
 import kotlinx.android.synthetic.main.content_edit_word.*
 
-class EditWordActivity : AppCompatActivity() {
+class WordEditingActivity : AppCompatActivity() {
     var word = Word("")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +32,8 @@ class EditWordActivity : AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_import_xls -> {
-
+            R.id.action_delete_word -> {
+                deleteCallAndFinish()
             }
             else -> super.onOptionsItemSelected(item)
         }
@@ -61,6 +61,13 @@ class EditWordActivity : AppCompatActivity() {
         intent.putExtra("Word", word)
         setResult(RESULT_CODE_WORD, intent)
 
+        finish()
+    }
+    private fun deleteCallAndFinish(){
+        word.deleteCall = 1
+        intent = Intent()
+        intent.putExtra("Word", word)
+        setResult(RESULT_CODE_WORD_DELETE, intent)
         finish()
     }
 }

@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_edit_word"
-        tools:context=".EditWordActivity">
+        tools:context=".WordEditingActivity">
 
     <TextView
             android:text="@string/word"

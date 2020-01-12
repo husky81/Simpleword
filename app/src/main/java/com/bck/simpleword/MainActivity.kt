@@ -1,30 +1,21 @@
 package com.bck.simpleword
 
-import android.app.Activity
-import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
-import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v4.widget.DrawerLayout
 import android.support.design.widget.NavigationView
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.*
-import android.widget.TextView
 import kotlinx.android.synthetic.main.content_main.*
 
 const val REQUEST_CODE_ADD_A_WORD: Int = 1921
 const val REQUEST_CODE_EDIT_A_WORD: Int = 1923
 const val RESULT_CODE_WORD: Int = 1952
+const val RESULT_CODE_WORD_DELETE: Int = 1953
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var words: Words
@@ -38,7 +29,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener {
-            val intent = Intent(this, EditWordActivity::class.java)
+            val intent = Intent(this, WordEditingActivity::class.java)
             //startActivity(intent)
             startActivityForResult(intent,REQUEST_CODE_ADD_A_WORD)
         }
@@ -140,13 +131,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         // words.update(word)
                         redrawWords(words)
                     }
+                    RESULT_CODE_WORD_DELETE -> {
+                        val word = data!!.getParcelableExtra<Word>("Word")
+                        words.delete(word)
+                        words.removeAt(positionEditingWord)
+                        redrawWords(words)
+                    }
                 }
             }
         }
     }
 
     fun openEditWordActivity(word: Word){
-        val intent = Intent(this, EditWordActivity::class.java)
+        val intent = Intent(this, WordEditingActivity::class.java)
         intent.putExtra("Word",word)
         startActivityForResult(intent, REQUEST_CODE_EDIT_A_WORD)
     }
