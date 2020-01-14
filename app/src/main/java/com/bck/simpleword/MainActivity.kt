@@ -40,9 +40,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
         //drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-
         navView.setNavigationItemSelectedListener(this)
-
 
         words = Words(this, recyclerView_MainWord)
         // words!!.add("aa")
@@ -73,16 +71,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_home -> {
+            R.id.nav_allWord -> {
                 // Handle the camera action
             }
-            R.id.nav_gallery -> {
+            R.id.nav_trash -> {
 
             }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_tools -> {
+            R.id.nav_setting -> {
 
             }
             R.id.nav_share -> {
