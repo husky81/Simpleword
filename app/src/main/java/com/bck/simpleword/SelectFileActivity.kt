@@ -3,9 +3,9 @@ package com.bck.simpleword
 import android.content.Context
 import android.os.Bundle
 import android.os.Environment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.content_select_file.*
 import java.io.File
 import android.annotation.SuppressLint
 import android.os.Build
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import android.widget.ImageView
 import java.text.SimpleDateFormat
 import java.util.*
@@ -44,13 +44,14 @@ class SelectFileActivity : AppCompatActivity() {
     }
 }
 class FileItems: ArrayList<ItemFile>(){
-    private var recyclerView: RecyclerView? = null
+    private var recyclerView: androidx.recyclerview.widget.RecyclerView? = null
     private val storageRootDirectory = Environment.getExternalStorageDirectory().toString() // "/storage/emulated/0"
 
     fun setLinearLayoutManager(context: Context) {
-        recyclerView!!.layoutManager = LinearLayoutManager(context)
+        recyclerView!!.layoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(context)
     }
-    fun setRecyclerView(recyclerView: RecyclerView) {
+    fun setRecyclerView(recyclerView: androidx.recyclerview.widget.RecyclerView) {
         this.recyclerView = recyclerView
     }
     private fun add(name : String) {
@@ -115,7 +116,7 @@ class ItemFile(val file : File) {
 
 
 }
-class SelectFileAdapter (private val items : FileItems) : RecyclerView.Adapter<SelectFileAdapter.ViewHolder>() {
+class SelectFileAdapter (private val items : FileItems) : androidx.recyclerview.widget.RecyclerView.Adapter<SelectFileAdapter.ViewHolder>() {
     interface ItemClick{
         fun onClick(view: View, position: Int)
     }
@@ -151,7 +152,7 @@ class SelectFileAdapter (private val items : FileItems) : RecyclerView.Adapter<S
     override fun getItemCount(): Int {
         return items.size
     }
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         var textViewName = view.findViewById(R.id.textView_FileName) as TextView
         var textViewModifiedDate = view.findViewById(R.id.textView_WordText) as TextView
         var imageView = view.findViewById(R.id.imageView_fileIcon) as ImageView

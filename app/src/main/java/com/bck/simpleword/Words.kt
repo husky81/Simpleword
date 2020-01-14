@@ -7,17 +7,18 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-class Words(activity: Activity, recyclerView: RecyclerView): ArrayList<Word>(){
+class Words(activity: Activity, recyclerView: androidx.recyclerview.widget.RecyclerView): ArrayList<Word>(){
     private val dbHandler = MyDBHandler(activity, null, null, 1)
     init {
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(activity)
         dbHandler.queryAll(this)
     }
     override fun add(element: Word): Boolean {
@@ -90,7 +91,7 @@ class Word(var name: String?) : Parcelable {
 
 }
 
-class WordAdapter (private val words : Words) : RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
+class WordAdapter (private val words : Words) : androidx.recyclerview.widget.RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
     interface ItemClick{ fun onClick(view: View, position: Int) }
     var itemClick: ItemClick? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
@@ -106,7 +107,7 @@ class WordAdapter (private val words : Words) : RecyclerView.Adapter<WordAdapter
     override fun getItemCount(): Int {
         return words.size
     }
-    class WordViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class WordViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         val textViewName = view.findViewById(R.id.textView_FileName) as TextView
         val textViewText = view.findViewById(R.id.textView_WordText) as TextView
 
