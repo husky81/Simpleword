@@ -40,9 +40,10 @@ class Words(activity: Activity, recyclerView: RecyclerView): ArrayList<Word>(){
     }
 }
 class Word(var name: String?) : Parcelable {
-    //파셀러블로 만들면 클래스를 엑티비티간에 전송할 수 있다.
-    //자동생성 기능이 좋으므로 변수가 변경되면 constructor 아래를 지우고 자동생성기능을 이용할 것. 190705
-    //https://blog.yena.io/studynote/2017/11/28/Android-Kotlin-putExtra.html
+    // 파셀러블로 만들면 클래스를 엑티비티간에 전송할 수 있다.
+    // 자동생성 기능이 좋으므로 변수가 변경되면
+    // 클래스 이름에 커서를 두고 alt+Enter, remove and add parcelable implementation 하면 됨. 200114
+    // https://blog.yena.io/studynote/2017/11/28/Android-Kotlin-putExtra.html
 
     var id: Int = 0 // database id
     var pronunciation: String? = ""
