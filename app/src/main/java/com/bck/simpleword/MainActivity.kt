@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -78,7 +77,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_setting -> {
-
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivityForResult(intent, REQUEST_CODE_EDIT_A_WORD)
             }
             R.id.nav_share -> {
 

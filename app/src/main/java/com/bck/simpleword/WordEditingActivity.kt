@@ -6,15 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 
-import kotlinx.android.synthetic.main.activity_edit_word.*
-import kotlinx.android.synthetic.main.content_edit_word.*
+import kotlinx.android.synthetic.main.activity_word_editing.*
+import kotlinx.android.synthetic.main.content_word_editing.*
 
 class WordEditingActivity : AppCompatActivity() {
     var word = Word("")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_word)
+        setContentView(R.layout.activity_word_editing)
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener {
