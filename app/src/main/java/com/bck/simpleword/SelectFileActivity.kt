@@ -16,9 +16,14 @@ import kotlinx.android.synthetic.main.content_select_file.*
 import java.io.File
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import androidx.annotation.RequiresApi
 import android.widget.ImageView
+import android.widget.Toast
+import kotlinx.android.synthetic.main.rv_item_file.view.*
+import kotlinx.android.synthetic.main.rv_item_file.view.textView_FileName
+import kotlinx.android.synthetic.main.rv_item_word.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -33,6 +38,8 @@ class SelectFileActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        getPermission(this,10)
+
         val items = FileItems()
         items.setRecyclerView(recyclerView_SelectFile)
         items.setLinearLayoutManager(this)
@@ -41,21 +48,20 @@ class SelectFileActivity : AppCompatActivity() {
 
         items.openDirectory(pathDownload)
 
-        getPermission(this,10)
 
 
     }
 
 }
 class FileItems: ArrayList<ItemFile>(){
-    private var recyclerView: androidx.recyclerview.widget.RecyclerView? = null
+    private var recyclerView: RecyclerView? = null
     private val storageRootDirectory = Environment.getExternalStorageDirectory().toString() // "/storage/emulated/0"
 
     fun setLinearLayoutManager(context: Context) {
         recyclerView!!.layoutManager =
-            androidx.recyclerview.widget.LinearLayoutManager(context)
+            LinearLayoutManager(context)
     }
-    fun setRecyclerView(recyclerView: androidx.recyclerview.widget.RecyclerView) {
+    fun setRecyclerView(recyclerView: RecyclerView) {
         this.recyclerView = recyclerView
     }
     private fun add(name : String) {
@@ -118,9 +124,8 @@ class ItemFile(val file : File) {
         this.name = name
     }
 
-
 }
-class SelectFileAdapter (private val items : FileItems) : androidx.recyclerview.widget.RecyclerView.Adapter<SelectFileAdapter.ViewHolder>() {
+class SelectFileAdapter (private val items : FileItems) : RecyclerView.Adapter<SelectFileAdapter.ViewHolder>() {
     interface ItemClick{
         fun onClick(view: View, position: Int)
     }
@@ -141,7 +146,7 @@ class SelectFileAdapter (private val items : FileItems) : androidx.recyclerview.
             holder.imageView.setImageResource(R.drawable.ic_folder_24dp)
         }else{
             if(item.file.extension == "xls"){
-                holder.imageView.setImageResource(R.drawable.ic_note_add_black_24dp)
+                holder.imageView.setImageResource(R.mipmap.ic_file_xls)
             }else{
                 holder.imageView.setImageResource(R.drawable.ic_insert_drive_file_24dp)
             }
@@ -149,14 +154,33 @@ class SelectFileAdapter (private val items : FileItems) : androidx.recyclerview.
 
         if(itemClick != null)
         {
-            holder.itemView.setOnClickListener { v -> itemClick?.onClick(v, position)
+            holder.itemView.setOnClickListener {v -> itemClick?.onClick(v, position)
+                //v.textView_FileName.text
+                //v.setBackgroundColor(Color.parseColor("#000000"))
+                if(item.file.extension == "xls"){
+                    if(v.isSelected){
+                        v.isSelected = false
+                        v.setBackgroundColor(Color.WHITE)
+                    }else{
+                        v.isSelected = true  //이거 해봐야 비주얼은 하낟 안변하네. 백그라운드 컬러 바꿔야..
+                        v.setBackgroundColor(Color.GRAY)
+                        sendFileNameAndCloseActivity(item.path)
+                    }
+                }
             }
         }
+    }
+    private fun sendFileNameAndCloseActivity(pathName : String){
+        //var intent : Intent()
+        //intent.putExtra("pathName", pathName)
+        //setResult(RESULT_CODE_WORD, intent)
+        //
+        //finish()
     }
     override fun getItemCount(): Int {
         return items.size
     }
-    class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var textViewName = view.findViewById(R.id.textView_FileName) as TextView
         var textViewModifiedDate = view.findViewById(R.id.textView_WordText) as TextView
         var imageView = view.findViewById(R.id.imageView_fileIcon) as ImageView
