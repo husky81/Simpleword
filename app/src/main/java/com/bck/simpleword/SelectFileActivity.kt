@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.content_select_file.*
 
 import java.io.File
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import android.widget.ImageView
@@ -40,8 +41,11 @@ class SelectFileActivity : AppCompatActivity() {
 
         items.openDirectory(pathDownload)
 
+        getPermission(this,10)
+
 
     }
+
 }
 class FileItems: ArrayList<ItemFile>(){
     private var recyclerView: androidx.recyclerview.widget.RecyclerView? = null

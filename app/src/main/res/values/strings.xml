@@ -37,5 +37,6 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="title_activity_word_editing">WordEditingActivity2</string>
     <string name="tag">태그</string>
+    <string name="search">검색</string>
 
 </resources>

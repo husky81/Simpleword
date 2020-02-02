@@ -91,12 +91,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.action_settings -> {
-
-            }
-            R.id.action_import_xls -> {
-                importXlsFile()
-            }
+            //R.id -> {
+            //}
             else -> super.onOptionsItemSelected(item)
         }
         return true
@@ -146,13 +142,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
         recyclerView_MainWord!!.adapter = adapter
-    }
-    private fun importXlsFile(){
-        // Request External Storage Read Permission.
-        getPermission(this,10)
-
-        val intent = Intent(this, SelectFileActivity::class.java)
-        startActivity(intent)
     }
 }
 

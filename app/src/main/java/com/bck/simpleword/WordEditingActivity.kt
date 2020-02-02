@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.GravityCompat
 
 import kotlinx.android.synthetic.main.activity_word_editing.*
 import kotlinx.android.synthetic.main.content_word_editing.*
@@ -24,6 +25,14 @@ class WordEditingActivity : AppCompatActivity() {
 
         getWordFromFirstActivity()
         showWord(word)
+    }
+    override fun onBackPressed() {
+        val drawerLayout: androidx.drawerlayout.widget.DrawerLayout = findViewById(R.id.drawer_layout)
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
