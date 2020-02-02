@@ -42,12 +42,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navView.setNavigationItemSelectedListener(this)
 
         words = Words(this, recyclerView_MainWord)
-        // words!!.add("aa")
-        // words!!.last().text = "사과"
-        // words!!.add("peach")
-        // words!!.last().text = "복숭아"
-        // words!!.add("potato")
-        // words!!.last().text = "감자"
+
 
         //words.deleteAll()
         redrawWords(words)

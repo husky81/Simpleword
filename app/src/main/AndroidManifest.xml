@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         package="com.bck.simpleword">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-            android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
         <activity
                 android:name=".WordEditingActivity"
-                android:label="@string/title_activity_word_editing2"
+                android:label="@string/title_activity_word_editing"
                 android:parentActivityName=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -24,15 +25,6 @@
                 android:name=".SettingsActivity"
                 android:label="@string/title_activity_settings"
                 android:parentActivityName=".MainActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.bck.simpleword.MainActivity" />
-        </activity>
-        <activity
-                android:name=".WordEditingActivity"
-                android:label="@string/title_activity_add_word"
-                android:parentActivityName=".MainActivity"
-                android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.bck.simpleword.MainActivity" />

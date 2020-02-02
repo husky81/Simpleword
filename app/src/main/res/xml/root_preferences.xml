@@ -13,8 +13,34 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
+<!--
+    Ref. Start an activity from a PreferenceScreen
+    https://stackoverflow.com/questions/15287595/start-an-activity-from-a-preferencescreen
+-->
 
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="import/export words">
+
+        <Preference
+                app:key="import"
+                app:title="단어 가져오기(xls)"
+                app:summary="엑셀파일에서 단어를 가져옵니다.">
+            <intent android:targetPackage="com.bck.simpleword"
+                    android:targetClass="com.bck.simpleword.SelectFileActivity"/>
+        </Preference>
+
+        <ListPreference
+
+                app:defaultValue="reply"
+                app:entries="@array/reply_entries"
+                app:entryValues="@array/reply_values"
+                app:key="reply"
+                app:title="@string/reply_title"
+                app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/messages_header">
 
